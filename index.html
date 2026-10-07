@@ -86,6 +86,7 @@ nav.menu a:hover{color:var(--gold)}
 .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
 .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .tile{background:var(--navy);color:var(--on-navy);border-radius:10px;padding:22px;display:flex;flex-direction:column;gap:10px}
+.tile.media{align-items:flex-start;gap:14px;padding:28px}
 .tile h3{color:var(--gold);font-size:1.5rem;font-weight:900}
 .stack{display:flex;flex-direction:column;gap:32px}
 .story{color:var(--ink-soft);max-width:44rem}
@@ -301,19 +302,12 @@ footer{background:var(--gold);color:var(--navy)}
   <div class="wrap stack">
     <div class="head" style="margin-bottom:0">
       <span class="eyebrow" data-i18n="e0">Experiencia</span>
-      <h2 data-i18n="e1">Resultados y testimonios</h2>
-      <p class="lead" data-i18n="e2">Esta sección está preparada para tus cifras y casos reales. Los recuadros punteados no se publican hasta completarlos.</p>
+      <h2 data-i18n="e1">Nuestra experiencia en vídeos e imágenes</h2>
+      <p class="lead" data-i18n="e2">Vídeos y fotos de nuestros estudiantes y de nuestro trabajo.</p>
     </div>
-    <div class="grid4">
-      <div class="pend"><span class="k">—</span><span class="t" data-i18n="e3">Estudiantes becados</span><span class="h" data-i18n="e7">Dato pendiente</span></div>
-      <div class="pend"><span class="k">—</span><span class="t" data-i18n="e4">Universidades</span><span class="h" data-i18n="e7">Dato pendiente</span></div>
-      <div class="pend"><span class="k">—</span><span class="t" data-i18n="e5">Años de actividad</span><span class="h" data-i18n="e7">Dato pendiente</span></div>
-      <div class="pend"><span class="k">—</span><span class="t" data-i18n="e6">Operaciones comerciales</span><span class="h" data-i18n="e7">Dato pendiente</span></div>
-    </div>
-    <div class="grid3">
-      <div class="pend"><span class="t" data-i18n="e8">Testimonio de un estudiante</span><span class="h" data-i18n="e11">Nombre, ciudad, universidad y foto con permiso</span></div>
-      <div class="pend"><span class="t" data-i18n="e9">Testimonio de una familia</span><span class="h" data-i18n="e11">Nombre, ciudad, universidad y foto con permiso</span></div>
-      <div class="pend"><span class="t" data-i18n="e10">Testimonio de un importador</span><span class="h" data-i18n="e12">Nombre, empresa y producto importado</span></div>
+    <div class="grid2">
+      <div class="tile media"><h3 data-i18n="e3">Vídeos</h3><p data-i18n="e4">Testimonios de estudiantes, llegadas a la universidad y nuestro trabajo en China.</p><a class="btn btn-gold" href="ENLACE-VIDEOS" target="_blank" rel="noopener" data-i18n="e5">Ver vídeos →</a></div>
+      <div class="tile media"><h3 data-i18n="e6">Imágenes</h3><p data-i18n="e7">Fotos de estudiantes becados, universidades y envíos comerciales.</p><a class="btn btn-gold" href="ENLACE-IMAGENES" target="_blank" rel="noopener" data-i18n="e8">Ver imágenes →</a></div>
     </div>
   </div>
 </section>
@@ -361,6 +355,7 @@ footer{background:var(--gold);color:var(--navy)}
             <option data-i18n="c7">Beca en China</option>
             <option data-i18n="c8">Beca en Marruecos</option>
             <option data-i18n="c9">Beca en Turquía</option>
+            <option data-i18n="c15">Gestión de visado de turismo para China</option>
             <option data-i18n="c10">Proveedores en China</option>
           </select></label>
         <label><span data-i18n="c11">Oficina</span>
@@ -425,10 +420,9 @@ l3:"Recherche de fournisseurs",l4:"Nous trouvons fabricants et grossistes pour l
 l5:"Vérification",l6:"Nous vérifions que le fournisseur est réel et fiable avant tout paiement.",
 l7:"Négociation et commande",l8:"Nous négocions le prix et les conditions en chinois, en votre nom.",
 l9:"Envoi en Guinée équatoriale",l10:"Nous coordonnons le transport de la Chine jusqu'à destination.",l11:"Demander un devis",
-e0:"Expérience",e1:"Résultats et témoignages",e2:"Cette section est prête pour vos chiffres et cas réels. Les cadres en pointillé ne sont pas publiés tant qu'ils ne sont pas complétés.",
-e3:"Étudiants boursiers",e4:"Universités",e5:"Années d'activité",e6:"Opérations commerciales",e7:"Donnée à fournir",
-e8:"Témoignage d'un étudiant",e9:"Témoignage d'une famille",e10:"Témoignage d'un importateur",
-e11:"Nom, ville, université et photo avec autorisation",e12:"Nom, entreprise et produit importé",
+e0:"Expérience",e1:"Notre expérience en vidéos et en images",e2:"Vidéos et photos de nos étudiants et de notre travail.",
+e3:"Vidéos",e4:"Témoignages d'étudiants, arrivées à l'université et notre travail en Chine.",e5:"Voir les vidéos →",
+e6:"Images",e7:"Photos d'étudiants boursiers, d'universités et d'envois commerciaux.",e8:"Voir les images →",
 f0:"Questions fréquentes",f1:"Ce qu'on nous demande le plus",
 f2:"Combien de temps prend la procédure de bourse ?",f3:"L'admission peut prendre de 1 à 2 mois. Vient ensuite la demande de visa, dont le délai dépend de l'ambassade.",
 f4:"Dans quels pays puis-je aller ?",f5:"Nous gérons des bourses en Chine, au Maroc et en Turquie.",
@@ -437,7 +431,7 @@ f8:"Comment se règle le service ?",f9:"Le mode de paiement est convenu avec vou
 f10:"Je suis importateur. Par où commencer ?",f11:"Dites-nous le produit recherché, la quantité et votre ville. Nous vous répondons avec des fournisseurs possibles et un devis.",
 f12:"Où voir les nouveaux appels ?",f13:"Nous les publions sur notre chaîne WhatsApp ABC_CONSULTING_BECAS.",
 c0:"Contact",c1:"Écrivez-nous sur WhatsApp",c2:"Choisissez le bureau le plus proche. Nous répondons en espagnol, français, anglais et chinois.",
-c3:"Chine · Bourses",c4:"Préparez votre message",c5:"Nom",c6:"Service",c7:"Bourse en Chine",c8:"Bourse au Maroc",c9:"Bourse en Turquie",c10:"Fournisseurs en Chine",
+c3:"Chine · Bourses",c4:"Préparez votre message",c5:"Nom",c6:"Service",c7:"Bourse en Chine",c8:"Bourse au Maroc",c9:"Bourse en Turquie",c10:"Fournisseurs en Chine",c15:"Visa de tourisme pour la Chine",
 c11:"Bureau",c12:"Message",c13:"Ouvrir dans WhatsApp",c14:"WhatsApp s'ouvre avec le message déjà rédigé. C'est vous qui décidez de l'envoyer.",
 g0:"Bourses · Commerce Chine–Guinée équatoriale",g1:"Mentions légales",g2:"Politique de confidentialité",
 g3:"© 2026 ABC Consulting S.L. · Données d'immatriculation et e-mail de contact à ajouter.",
@@ -479,10 +473,9 @@ l3:"Supplier sourcing",l4:"We find manufacturers and wholesalers for the product
 l5:"Verification",l6:"We check that the supplier is real and reliable before you pay.",
 l7:"Negotiation and order",l8:"We negotiate price and terms in Chinese on your behalf.",
 l9:"Shipping to Equatorial Guinea",l10:"We coordinate transport from China to destination.",l11:"Request a quote",
-e0:"Track record",e1:"Results and testimonials",e2:"This section is ready for your real figures and cases. The dashed boxes are not published until they are filled in.",
-e3:"Scholarship students",e4:"Universities",e5:"Years in operation",e6:"Trade operations",e7:"Figure needed",
-e8:"Student testimonial",e9:"Family testimonial",e10:"Importer testimonial",
-e11:"Name, city, university and photo with permission",e12:"Name, company and imported product",
+e0:"Track record",e1:"Our experience in videos and images",e2:"Videos and photos of our students and our work.",
+e3:"Videos",e4:"Student testimonials, arrivals at university and our work in China.",e5:"Watch videos →",
+e6:"Images",e7:"Photos of scholarship students, universities and trade shipments.",e8:"View images →",
 f0:"Frequently asked questions",f1:"What people ask us most",
 f2:"How long does the scholarship process take?",f3:"Admission can take 1 to 2 months. The visa application follows, and its timing depends on the embassy.",
 f4:"Which countries can I go to?",f5:"We manage scholarships in China, Morocco and Türkiye.",
@@ -491,7 +484,7 @@ f8:"How do I pay for the service?",f9:"The payment method is agreed with you bef
 f10:"I am an importer. How do I start?",f11:"Tell us the product, the quantity and your city. We reply with supplier options and a quote.",
 f12:"Where can I see new calls?",f13:"We post them on our WhatsApp channel ABC_CONSULTING_BECAS.",
 c0:"Contact",c1:"Message us on WhatsApp",c2:"Choose the nearest office. We reply in Spanish, French, English and Chinese.",
-c3:"China · Scholarships",c4:"Prepare your message",c5:"Name",c6:"Service",c7:"Scholarship in China",c8:"Scholarship in Morocco",c9:"Scholarship in Türkiye",c10:"Suppliers in China",
+c3:"China · Scholarships",c4:"Prepare your message",c5:"Name",c6:"Service",c7:"Scholarship in China",c8:"Scholarship in Morocco",c9:"Scholarship in Türkiye",c10:"Suppliers in China",c15:"Tourist visa for China",
 c11:"Office",c12:"Message",c13:"Open in WhatsApp",c14:"WhatsApp opens with the message already written. You decide whether to send it.",
 g0:"Scholarships · China–Equatorial Guinea trade",g1:"Legal notice",g2:"Privacy policy",
 g3:"© 2026 ABC Consulting S.L. · Company registration details and contact email still to be added.",
