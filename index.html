@@ -120,6 +120,20 @@ nav.menu a:hover{color:var(--gold)}
 .pend .t{font-weight:700}
 .pend .h{font-size:.85rem;color:var(--ink-soft)}
 
+/* carrusel */
+.slider{position:relative;width:100%;aspect-ratio:16/9;max-height:560px;border-radius:12px;overflow:hidden;background:var(--navy)}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity .8s;display:flex;align-items:center;justify-content:center}
+.slide.on{opacity:1}
+.slide img{width:100%;height:100%;object-fit:cover;display:block}
+.slide.ph{background:linear-gradient(135deg,var(--navy-2),var(--navy-3))}
+.slide.ph:nth-child(even){background:linear-gradient(135deg,var(--navy-3),var(--navy))}
+.slide.ph::after{content:attr(data-ph);font:900 clamp(2rem,8vw,5rem) var(--display);text-transform:uppercase;color:var(--gold);border:3px dashed var(--gold);border-radius:12px;padding:.2em .6em}
+.s-nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:0;background:var(--gold);color:var(--navy);font:900 1.6rem/1 var(--display);cursor:pointer}
+.s-prev{left:12px}.s-next{right:12px}
+.s-dots{position:absolute;left:0;right:0;bottom:12px;display:flex;justify-content:center;gap:8px}
+.s-dots button{width:12px;height:12px;border-radius:50%;border:2px solid var(--on-navy);background:transparent;padding:0;cursor:pointer}
+.s-dots button[aria-current="true"]{background:var(--gold);border-color:var(--gold)}
+@media (prefers-reduced-motion:reduce){.slide{transition:none}}
 /* faq */
 details{border-bottom:1.5px solid var(--line);padding-block:14px}
 summary{cursor:pointer;font:800 1.08rem var(--display)}
@@ -305,9 +319,21 @@ footer{background:var(--gold);color:var(--navy)}
       <h2 data-i18n="e1">Nuestra experiencia en vídeos e imágenes</h2>
       <p class="lead" data-i18n="e2">Vídeos y fotos de nuestros estudiantes y de nuestro trabajo.</p>
     </div>
-    <div class="grid2">
+    <!-- CARRUSEL DE FOTOS: cambia aqui las imagenes -->
+    <div class="slider" id="slider">
+      <div class="slide on" data-ph="Foto 1"><img src="fotos/foto1.jpg" alt="ABC Consulting SL, foto 1"></div>
+      <div class="slide" data-ph="Foto 2"><img src="fotos/foto2.jpg" alt="ABC Consulting SL, foto 2"></div>
+      <div class="slide" data-ph="Foto 3"><img src="fotos/foto3.jpg" alt="ABC Consulting SL, foto 3"></div>
+      <div class="slide" data-ph="Foto 4"><img src="fotos/foto4.jpg" alt="ABC Consulting SL, foto 4"></div>
+      <div class="slide" data-ph="Foto 5"><img src="fotos/foto5.jpg" alt="ABC Consulting SL, foto 5"></div>
+      <div class="slide" data-ph="Foto 6"><img src="fotos/foto6.jpg" alt="ABC Consulting SL, foto 6"></div>
+      <button type="button" class="s-nav s-prev" id="s-prev" aria-label="Anterior">&#8249;</button>
+      <button type="button" class="s-nav s-next" id="s-next" aria-label="Siguiente">&#8250;</button>
+      <div class="s-dots" id="s-dots"></div>
+    </div>
+    <!-- FIN DEL CARRUSEL -->
+    <div>
       <div class="tile media"><h3 data-i18n="e3">Vídeos</h3><p data-i18n="e4">Testimonios de estudiantes, llegadas a la universidad y nuestro trabajo en China.</p><a class="btn btn-gold" href="ENLACE-VIDEOS" target="_blank" rel="noopener" data-i18n="e5">Ver vídeos →</a></div>
-      <div class="tile media"><h3 data-i18n="e6">Imágenes</h3><p data-i18n="e7">Fotos de estudiantes becados, universidades y envíos comerciales.</p><a class="btn btn-gold" href="ENLACE-IMAGENES" target="_blank" rel="noopener" data-i18n="e8">Ver imágenes →</a></div>
     </div>
   </div>
 </section>
@@ -422,7 +448,6 @@ l7:"Négociation et commande",l8:"Nous négocions le prix et les conditions en c
 l9:"Envoi en Guinée équatoriale",l10:"Nous coordonnons le transport de la Chine jusqu'à destination.",l11:"Demander un devis",
 e0:"Expérience",e1:"Notre expérience en vidéos et en images",e2:"Vidéos et photos de nos étudiants et de notre travail.",
 e3:"Vidéos",e4:"Témoignages d'étudiants, arrivées à l'université et notre travail en Chine.",e5:"Voir les vidéos →",
-e6:"Images",e7:"Photos d'étudiants boursiers, d'universités et d'envois commerciaux.",e8:"Voir les images →",
 f0:"Questions fréquentes",f1:"Ce qu'on nous demande le plus",
 f2:"Combien de temps prend la procédure de bourse ?",f3:"L'admission peut prendre de 1 à 2 mois. Vient ensuite la demande de visa, dont le délai dépend de l'ambassade.",
 f4:"Dans quels pays puis-je aller ?",f5:"Nous gérons des bourses en Chine, au Maroc et en Turquie.",
@@ -475,7 +500,6 @@ l7:"Negotiation and order",l8:"We negotiate price and terms in Chinese on your b
 l9:"Shipping to Equatorial Guinea",l10:"We coordinate transport from China to destination.",l11:"Request a quote",
 e0:"Track record",e1:"Our experience in videos and images",e2:"Videos and photos of our students and our work.",
 e3:"Videos",e4:"Student testimonials, arrivals at university and our work in China.",e5:"Watch videos →",
-e6:"Images",e7:"Photos of scholarship students, universities and trade shipments.",e8:"View images →",
 f0:"Frequently asked questions",f1:"What people ask us most",
 f2:"How long does the scholarship process take?",f3:"Admission can take 1 to 2 months. The visa application follows, and its timing depends on the embassy.",
 f4:"Which countries can I go to?",f5:"We manage scholarships in China, Morocco and Türkiye.",
@@ -511,6 +535,26 @@ document.querySelectorAll(".lang button").forEach(function(b){b.addEventListener
 document.getElementById("msg-form").addEventListener("submit",function(e){e.preventDefault();});
 var saved=null;try{saved=localStorage.getItem("abc-lang");}catch(e){}
 setLang(saved&&T[saved]?saved:"es");
+
+/* Carrusel de fotos */
+(function(){
+  var SEGUNDOS=4;
+  var box=document.getElementById("slider");if(!box)return;
+  var sl=box.querySelectorAll(".slide"),dots=document.getElementById("s-dots"),i=0,t=null;
+  sl.forEach(function(s,n){
+    var im=s.querySelector("img");
+    function ph(){s.classList.add("ph");im.hidden=true;}
+    if(im.complete&&!im.naturalWidth)ph();else im.addEventListener("error",ph);
+    var d=document.createElement("button");d.type="button";d.setAttribute("aria-label","Foto "+(n+1));
+    d.addEventListener("click",function(){go(n);start();});dots.appendChild(d);
+  });
+  function go(n){i=(n+sl.length)%sl.length;sl.forEach(function(s,k){s.classList.toggle("on",k===i);});
+    dots.querySelectorAll("button").forEach(function(d,k){d.setAttribute("aria-current",k===i?"true":"false");});}
+  function start(){clearInterval(t);t=setInterval(function(){go(i+1);},SEGUNDOS*1000);}
+  document.getElementById("s-prev").addEventListener("click",function(){go(i-1);start();});
+  document.getElementById("s-next").addEventListener("click",function(){go(i+1);start();});
+  go(0);start();
+})();
 </script>
 
 </body>
