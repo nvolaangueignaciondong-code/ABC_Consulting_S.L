@@ -85,11 +85,6 @@ nav.menu a:hover{color:var(--gold)}
 .hero-track{display:flex;height:100%;transition:transform 1.2s ease-in-out}
 .hs{flex:0 0 100%;height:100%;position:relative;background:var(--navy-3)}
 .hs img{width:100%;height:100%;object-fit:cover;display:block}
-.hs.ph:nth-child(1){background:linear-gradient(120deg,#1E3877,#2A5CA8)}
-.hs.ph:nth-child(2){background:linear-gradient(120deg,#3A2F12,#8A6413)}
-.hs.ph:nth-child(3){background:linear-gradient(120deg,#123C4F,#1F7FA6)}
-.hs.ph:nth-child(4){background:linear-gradient(120deg,#2B1E4F,#5B4A9A)}
-.hs.ph::after{content:attr(data-ph);position:absolute;right:20px;bottom:16px;font:800 .8rem var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--gold);border:2px dashed var(--gold);border-radius:6px;padding:.3em .7em;z-index:3}
 .hero-band::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(5,28,80,.92) 0%,rgba(5,28,80,.78) 55%,rgba(5,28,80,.55) 100%)}
 @media (max-width:860px){.hero-band::before{background:rgba(5,28,80,.82)}}
 @media (prefers-reduced-motion:reduce){.hero-track{transition:none}}
@@ -219,12 +214,12 @@ footer{background:var(--gold);color:var(--navy)}
 
 <main>
 <section id="inicio" class="band band-navy hero-band">
-  <!-- FOTOS DE PORTADA: Aqui las imagenes del fondo -->
+  <!-- FOTOS DE PORTADA: cambia aqui las imagenes del fondo -->
   <div class="hero-bg" aria-hidden="true"><div class="hero-track" id="hero-track">
-    <div class="hs" data-ph="Portada1"><img src="fotos/Portada1.jpg"" alt=""></div>
-    <div class="hs" data-ph="Portada2"><img src="fotos/Portada2.jpg" alt=""></div>
-    <div class="hs" data-ph="Portada3"><img src="fotos/Portada3.jpg" alt=""></div>
-    <div class="hs" data-ph="Portada4"><img src="fotos/Portada4.jpg" alt=""></div>
+    <div class="hs" data-ph="Portada 1"><img src="fotos/Portada1.jpg" alt=""></div>
+    <div class="hs" data-ph="Portada 2"><img src="fotos/Portada2.jpg" alt=""></div>
+    <div class="hs" data-ph="Portada 3"><img src="fotos/Portada3.jpg" alt=""></div>
+    <div class="hs" data-ph="Portada 4"><img src="fotos/Portada4.jpg" alt=""></div>
   </div></div>
   <!-- FIN FOTOS DE PORTADA -->
   <div class="wrap hero">
@@ -583,11 +578,13 @@ setLang(saved&&T[saved]?saved:"es");
 (function(){
   var SEGUNDOS_PORTADA=5;
   var tr=document.getElementById("hero-track");if(!tr)return;
-  var hs=tr.querySelectorAll(".hs"),i=0;
-  hs.forEach(function(s){var im=s.querySelector("img");function ph(){s.classList.add("ph");im.hidden=true;}
-    if(im.complete&&!im.naturalWidth)ph();else im.addEventListener("error",ph);});
-  if(hs.length<2)return;
-  setInterval(function(){i=(i+1)%hs.length;tr.style.transform="translateX(-"+(i*100)+"%)";},SEGUNDOS_PORTADA*1000);
+  var i=0,hs=[];
+  /* Las fotos que no existen se quitan solas; solo pasan las que si estan subidas */
+  tr.querySelectorAll(".hs").forEach(function(s){var im=s.querySelector("img");
+    function quita(){if(s.parentNode)s.parentNode.removeChild(s);hs=tr.querySelectorAll(".hs");}
+    if(im.complete&&!im.naturalWidth)quita();else im.addEventListener("error",quita);});
+  hs=tr.querySelectorAll(".hs");
+  setInterval(function(){if(hs.length<2)return;i=(i+1)%hs.length;tr.style.transform="translateX(-"+(i*100)+"%)";},SEGUNDOS_PORTADA*1000);
 })();
 </script>
 
