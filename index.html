@@ -95,8 +95,28 @@ nav.menu a:hover{color:var(--gold)}
 .hero-band .lead{color:rgba(255,255,255,.9)}
 .hero-band .panel{background:rgba(18,42,99,.55);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
 
-}
-  /* about */
+/* equipo */
+.team-viewport{overflow:hidden;padding:18px 4px 6px}
+.team{display:flex;gap:20px;align-items:flex-start;transition:transform .8s ease}
+.team .member{flex:0 0 calc((100% - 40px)/3);min-width:0}
+@media (max-width:860px){.team .member{flex-basis:calc((100% - 20px)/2)}}
+@media (max-width:560px){.team .member{flex-basis:100%}}
+.member{background:var(--paper);border-radius:12px;padding:24px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;border-top:5px solid var(--gold)}
+.avatar{transition:transform .35s ease,box-shadow .35s ease;position:relative;z-index:1;width:132px;height:132px;border-radius:50%;overflow:hidden;background:var(--navy);display:flex;align-items:center;justify-content:center;margin-bottom:6px;border:4px solid var(--gold)}
+.avatar img{width:100%;height:100%;object-fit:cover;display:block}
+.avatar.ini::after{content:attr(data-ini);font:900 2.4rem var(--display);color:var(--gold)}
+.member h3{color:var(--navy);font-size:1.25rem}
+.member .role{font:800 .8rem var(--display);letter-spacing:.12em;text-transform:uppercase;color:#9A6A00}
+.member .bio{color:var(--ink-soft);font-size:.98rem;margin-top:10px}
+.team-wrap{display:flex;flex-direction:column;gap:10px;scroll-margin-top:120px;padding-top:8px}
+.team-title{font-size:clamp(1.4rem,3vw,1.9rem);font-weight:900;font-stretch:110%;text-transform:uppercase;color:var(--navy);margin-bottom:14px}
+.member{background:var(--mist)}
+.member:hover .avatar{transform:scale(1.28);transform-origin:center bottom;box-shadow:0 10px 26px rgba(5,28,80,.35)}
+.more{width:100%;border-bottom:0;padding-block:0}
+.more summary{list-style:none;cursor:pointer;display:inline-block;font:800 .85rem var(--display);letter-spacing:.06em;color:var(--navy);background:var(--gold);padding:.6em 1.1em;border-radius:8px;margin-top:6px}
+.more summary::-webkit-details-marker{display:none}
+.more[open] summary{background:var(--navy);color:var(--on-navy)}
+/* about */
 .about{border-left:8px solid var(--gold);padding-left:22px;display:flex;flex-direction:column;gap:14px;max-width:48rem}
 .about p{font-size:1.15rem}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
@@ -210,6 +230,7 @@ footer{background:var(--gold);color:var(--navy)}
   <nav class="menu" aria-label="Secciones">
     <div class="wrap"><ul>
       <li><a href="#nosotros" data-i18n="n1">Nosotros</a></li>
+      <li><a href="#equipo" data-i18n="n8">Equipo</a></li>
       <li><a href="#becas" data-i18n="n2">Becas</a></li>
       <li><a href="#proceso" data-i18n="n3">Proceso</a></li>
       <li><a href="#logistica" data-i18n="n4">Logística</a></li>
@@ -267,6 +288,63 @@ footer{background:var(--gold);color:var(--navy)}
       <div class="tile"><h3 data-i18n="a7">Valores</h3><p data-i18n="a8">Transparencia · Confianza · Excelencia · Compromiso con el cliente</p></div>
     </div>
     <p class="story" data-i18n="a9">ABC Consulting SL fue fundada por el Ingeniero Lucio Miko. Empezó acompañando a estudiantes de Guinea Ecuatorial que querían estudiar en China. La red de contactos creada allí abrió después la segunda línea de trabajo: la búsqueda de proveedores para empresas guineanas.</p>
+    <!-- EQUIPO: aqui se presentan los gestores -->
+    <div id="equipo" class="team-wrap">
+      <span class="eyebrow" data-i18n="t0">Nuestro equipo</span>
+      <h3 class="team-title" data-i18n="t1">Las personas que te acompañan</h3>
+      <div class="team-viewport"><div class="team" id="team-track">
+        <!-- PERSONA 1 -->
+        <div class="member">
+          <div class="avatar" data-ini="LM"><img src="fotos/equipo1.jpg" alt="Lucio Miko"></div>
+          <h3>Ing. BIG KASAMA</h3>
+          <p class="role" data-i18n="p1r">Fundador</p>
+          <details class="more"><summary data-i18n="t9">Ver información</summary><p class="bio" data-i18n="p1b">Fundó ABC Consulting para acompañar a estudiantes de Guinea Ecuatorial que querían estudiar en China.</p></details>
+        </div>
+        <!-- PERSONA 2 -->
+        <div class="member">
+          <div class="avatar" data-ini="AB"><img src="fotos/equipo2.jpg" alt="Gestor 2"></div>
+          <h3>Nombre Apellido</h3>
+          <p class="role" data-i18n="p2r">Cargo</p>
+          <details class="more"><summary data-i18n="t9">Ver información</summary><p class="bio" data-i18n="p2b">Breve descripción de su trabajo en la agencia.</p></details>
+        </div>
+        <!-- PERSONA 3 -->
+        <div class="member">
+          <div class="avatar" data-ini="CD"><img src="fotos/equipo3.jpg" alt="Gestor 3"></div>
+          <h3>Nombre Apellido</h3>
+          <p class="role" data-i18n="p3r">Cargo</p>
+          <details class="more"><summary data-i18n="t9">Ver información</summary><p class="bio" data-i18n="p3b">Breve descripción de su trabajo en la agencia.</p></details>
+        </div>
+        <!-- PERSONA 4 -->
+        <div class="member">
+          <div class="avatar" data-ini="EF"><img src="fotos/equipo4.jpg" alt="Gestor 4"></div>
+          <h3>Nombre Apellido</h3>
+          <p class="role" data-i18n="p4r">Cargo</p>
+          <details class="more"><summary data-i18n="t9">Ver información</summary><p class="bio" data-i18n="p4b">Breve descripción de su trabajo en la agencia.</p></details>
+        </div>
+        <!-- PERSONA 5 -->
+        <div class="member">
+          <div class="avatar" data-ini="GH"><img src="fotos/equipo5.jpg" alt="Gestor 5"></div>
+          <h3>Nombre Apellido</h3>
+          <p class="role" data-i18n="p5r">Cargo</p>
+          <details class="more"><summary data-i18n="t9">Ver información</summary><p class="bio" data-i18n="p5b">Breve descripción de su trabajo en la agencia.</p></details>
+        </div>
+        <!-- PERSONA 6 -->
+        <div class="member">
+          <div class="avatar" data-ini="IJ"><img src="fotos/equipo6.jpg" alt="Gestor 6"></div>
+          <h3>Nombre Apellido</h3>
+          <p class="role" data-i18n="p6r">Cargo</p>
+          <details class="more"><summary data-i18n="t9">Ver información</summary><p class="bio" data-i18n="p6b">Breve descripción de su trabajo en la agencia.</p></details>
+        </div>
+        <!-- PERSONA 7 -->
+        <div class="member">
+          <div class="avatar" data-ini="KL"><img src="fotos/equipo7.jpg" alt="Gestor 7"></div>
+          <h3>Nombre Apellido</h3>
+          <p class="role" data-i18n="p7r">Cargo</p>
+          <details class="more"><summary data-i18n="t9">Ver información</summary><p class="bio" data-i18n="p7b">Breve descripción de su trabajo en la agencia.</p></details>
+        </div>
+      </div></div>
+    </div>
+    <!-- FIN EQUIPO -->
   </div>
 </section>
 
@@ -437,6 +515,7 @@ footer{background:var(--gold);color:var(--navy)}
 
 <script>
 var T={fr:{
+n8:"Équipe",t9:"Voir le profil",t0:"Notre équipe",t1:"Les personnes qui vous accompagnent",t2:"Une équipe entre la Guinée équatoriale et la Chine qui connaît la démarche du début à la fin.",p1r:"Fondateur",p1b:"Il a fondé ABC Consulting pour accompagner les étudiants de Guinée équatoriale qui voulaient étudier en Chine.",p2r:"Poste",p2b:"Brève description de son rôle dans l'agence.",p3r:"Poste",p3b:"Brève description de son rôle dans l'agence.",p4r:"Poste",p4b:"Brève description de son rôle dans l'agence.",p5r:"Poste",p5b:"Brève description de son rôle dans l'agence.",p6r:"Poste",p6b:"Brève description de son rôle dans l'agence.",p7r:"Poste",p7b:"Brève description de son rôle dans l'agence.",
 wa:"WhatsApp",n1:"À propos",n2:"Bourses",n3:"Démarche",n4:"Logistique",n5:"Expérience",n6:"Questions",n7:"Contact",
 h0:"Conseil éducatif · Logistique commerciale",
 h1:"Votre bourse à l'étranger. <em>Votre fournisseur en Chine.</em>",
@@ -489,6 +568,7 @@ g0:"Bourses · Commerce Chine–Guinée équatoriale",g1:"Mentions légales",g2:
 g3:"© 2026 ABC Consulting S.L. · abcconsulting2025@my.com",
 m1:"Bonjour, je m'appelle",m2:"Je suis intéressé(e) par :"
 },en:{
+n8:"Team",t9:"View profile",t0:"Our team",t1:"The people who guide you",t2:"A team between Equatorial Guinea and China that knows the process from start to finish.",p1r:"Founder",p1b:"He founded ABC Consulting to support students from Equatorial Guinea who wanted to study in China.",p2r:"Role",p2b:"Short description of their work at the agency.",p3r:"Role",p3b:"Short description of their work at the agency.",p4r:"Role",p4b:"Short description of their work at the agency.",p5r:"Role",p5b:"Short description of their work at the agency.",p6r:"Role",p6b:"Short description of their work at the agency.",p7r:"Role",p7b:"Short description of their work at the agency.",
 wa:"WhatsApp",n1:"About",n2:"Scholarships",n3:"Process",n4:"Logistics",n5:"Track record",n6:"FAQ",n7:"Contact",
 h0:"Education advisory · Trade logistics",
 h1:"Your scholarship abroad. <em>Your supplier in China.</em>",
@@ -594,6 +674,25 @@ setLang(saved&&T[saved]?saved:"es");
     if(im.complete&&!im.naturalWidth)quita();else im.addEventListener("error",quita);});
   hs=tr.querySelectorAll(".hs");
   setInterval(function(){if(hs.length<2)return;i=(i+1)%hs.length;tr.style.transform="translateX(-"+(i*100)+"%)";},SEGUNDOS_PORTADA*1000);
+})();
+
+/* Equipo: si falta la foto, se muestran las iniciales */
+document.querySelectorAll(".avatar").forEach(function(a){var im=a.querySelector("img");if(!im)return;
+  function ini(){a.classList.add("ini");im.hidden=true;}
+  if(im.complete&&!im.naturalWidth)ini();else im.addEventListener("error",ini);});
+
+/* Equipo: pasa automaticamente cada 5 segundos; al pasar el raton se detiene y la foto se amplia */
+(function(){
+  var SEGUNDOS_EQUIPO=5;
+  var tr=document.getElementById("team-track");if(!tr)return;
+  var vp=tr.parentNode,i=0,quieto=false;
+  function paso(){var c=tr.querySelector(".member");return c?c.getBoundingClientRect().width+20:0;}
+  function visibles(){var p=paso();return p?Math.max(1,Math.round((vp.clientWidth+20)/p)):1;}
+  function mueve(){var max=tr.children.length-visibles();if(i>max)i=0;tr.style.transform="translateX(-"+(i*paso())+"px)";}
+  setInterval(function(){if(quieto)return;i++;if(i>tr.children.length-visibles())i=0;mueve();},SEGUNDOS_EQUIPO*1000);
+  tr.addEventListener("mouseover",function(){quieto=true;});
+  tr.addEventListener("mouseleave",function(){quieto=false;});
+  window.addEventListener("resize",mueve);
 })();
 </script>
 
