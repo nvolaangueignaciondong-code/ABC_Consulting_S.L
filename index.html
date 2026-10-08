@@ -78,6 +78,21 @@ nav.menu a:hover{color:var(--gold)}
 .dot.sky{background:var(--sky)}
 .panel small{color:var(--on-navy-soft);font-size:.9rem}
 
+/* fondo de portada deslizable */
+.hero-band{position:relative;overflow:hidden;isolation:isolate}
+.hero-band>.wrap{position:relative;z-index:2}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-track{display:flex;height:100%;transition:transform 1.2s ease-in-out}
+.hs{flex:0 0 100%;height:100%;position:relative;background:var(--navy-3)}
+.hs img{width:100%;height:100%;object-fit:cover;display:block}
+.hs.ph:nth-child(1){background:linear-gradient(120deg,#1E3877,#2A5CA8)}
+.hs.ph:nth-child(2){background:linear-gradient(120deg,#3A2F12,#8A6413)}
+.hs.ph:nth-child(3){background:linear-gradient(120deg,#123C4F,#1F7FA6)}
+.hs.ph:nth-child(4){background:linear-gradient(120deg,#2B1E4F,#5B4A9A)}
+.hs.ph::after{content:attr(data-ph);position:absolute;right:20px;bottom:16px;font:800 .8rem var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--gold);border:2px dashed var(--gold);border-radius:6px;padding:.3em .7em;z-index:3}
+.hero-band::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(5,28,80,.92) 0%,rgba(5,28,80,.78) 55%,rgba(5,28,80,.55) 100%)}
+@media (max-width:860px){.hero-band::before{background:rgba(5,28,80,.82)}}
+@media (prefers-reduced-motion:reduce){.hero-track{transition:none}}
 /* about */
 .about{border-left:8px solid var(--gold);padding-left:22px;display:flex;flex-direction:column;gap:14px;max-width:48rem}
 .about p{font-size:1.15rem}
@@ -203,7 +218,15 @@ footer{background:var(--gold);color:var(--navy)}
 </header>
 
 <main>
-<section id="inicio" class="band band-navy">
+<section id="inicio" class="band band-navy hero-band">
+  <!-- FOTOS DE PORTADA: cambia aqui las imagenes del fondo -->
+  <div class="hero-bg" aria-hidden="true"><div class="hero-track" id="hero-track">
+    <div class="hs" data-ph="Portada 1"><img src="fotos/portada1.jpg" alt=""></div>
+    <div class="hs" data-ph="Portada 2"><img src="fotos/portada2.jpg" alt=""></div>
+    <div class="hs" data-ph="Portada 3"><img src="fotos/portada3.jpg" alt=""></div>
+    <div class="hs" data-ph="Portada 4"><img src="fotos/portada4.jpg" alt=""></div>
+  </div></div>
+  <!-- FIN FOTOS DE PORTADA -->
   <div class="wrap hero">
     <div class="hero-copy">
       <span class="pill" data-i18n="h0">Asesoría educativa · Logística comercial</span>
@@ -554,6 +577,17 @@ setLang(saved&&T[saved]?saved:"es");
   document.getElementById("s-prev").addEventListener("click",function(){go(i-1);start();});
   document.getElementById("s-next").addEventListener("click",function(){go(i+1);start();});
   go(0);start();
+})();
+
+/* Fondo de portada deslizable */
+(function(){
+  var SEGUNDOS_PORTADA=5;
+  var tr=document.getElementById("hero-track");if(!tr)return;
+  var hs=tr.querySelectorAll(".hs"),i=0;
+  hs.forEach(function(s){var im=s.querySelector("img");function ph(){s.classList.add("ph");im.hidden=true;}
+    if(im.complete&&!im.naturalWidth)ph();else im.addEventListener("error",ph);});
+  if(hs.length<2)return;
+  setInterval(function(){i=(i+1)%hs.length;tr.style.transform="translateX(-"+(i*100)+"%)";},SEGUNDOS_PORTADA*1000);
 })();
 </script>
 
