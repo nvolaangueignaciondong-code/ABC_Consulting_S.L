@@ -96,6 +96,13 @@ nav.menu a:hover{color:var(--gold)}
 .hero-band .panel{background:rgba(18,42,99,.55);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
 
 /* equipo */
+.team-box{position:relative;padding-inline:28px}
+.t-nav{position:absolute;top:110px;z-index:3;width:46px;height:46px;border-radius:50%;border:0;background:var(--gold);color:var(--navy);font:900 1.7rem/1 var(--display);cursor:pointer;box-shadow:0 4px 12px rgba(5,28,80,.25)}
+.t-nav:hover{background:var(--navy);color:var(--gold)}
+.t-prev{left:0}.t-next{right:0}
+.t-dots{display:flex;justify-content:center;gap:8px;margin-top:14px}
+.t-dots button{width:12px;height:12px;border-radius:50%;border:2px solid var(--navy);background:transparent;padding:0;cursor:pointer}
+.t-dots button[aria-current="true"]{background:var(--gold);border-color:var(--gold)}
 .team-viewport{overflow:hidden;padding:18px 4px 6px}
 .team{display:flex;gap:20px;align-items:flex-start;transition:transform .8s ease}
 .team .member{flex:0 0 calc((100% - 40px)/3);min-width:0}
@@ -292,11 +299,14 @@ footer{background:var(--gold);color:var(--navy)}
     <div id="equipo" class="team-wrap">
       <span class="eyebrow" data-i18n="t0">Nuestro equipo</span>
       <h3 class="team-title" data-i18n="t1">Las personas que te acompañan</h3>
+      <div class="team-box">
+      <button type="button" class="t-nav t-prev" id="t-prev" aria-label="Anterior">&#8249;</button>
+      <button type="button" class="t-nav t-next" id="t-next" aria-label="Siguiente">&#8250;</button>
       <div class="team-viewport"><div class="team" id="team-track">
         <!-- PERSONA 1 -->
         <div class="member">
           <div class="avatar" data-ini="LM"><img src="fotos/equipo1.jpg" alt="Lucio Miko"></div>
-          <h3>Ing. BIG KASAMA</h3>
+          <h3>Ing. Lucio Miko</h3>
           <p class="role" data-i18n="p1r">Fundador</p>
           <details class="more"><summary data-i18n="t9">Ver información</summary><p class="bio" data-i18n="p1b">Fundó ABC Consulting para acompañar a estudiantes de Guinea Ecuatorial que querían estudiar en China.</p></details>
         </div>
@@ -343,6 +353,8 @@ footer{background:var(--gold);color:var(--navy)}
           <details class="more"><summary data-i18n="t9">Ver información</summary><p class="bio" data-i18n="p7b">Breve descripción de su trabajo en la agencia.</p></details>
         </div>
       </div></div>
+      </div>
+      <div class="t-dots" id="t-dots"></div>
     </div>
     <!-- FIN EQUIPO -->
   </div>
@@ -681,18 +693,27 @@ document.querySelectorAll(".avatar").forEach(function(a){var im=a.querySelector(
   function ini(){a.classList.add("ini");im.hidden=true;}
   if(im.complete&&!im.naturalWidth)ini();else im.addEventListener("error",ini);});
 
-/* Equipo: pasa automaticamente cada 5 segundos; al pasar el raton se detiene y la foto se amplia */
+/* Equipo: pasa solo cada pocos segundos; flechas, puntos y deslizar con el dedo para avanzar */
 (function(){
-  var SEGUNDOS_EQUIPO=5;
+  var SEGUNDOS_EQUIPO=3;
   var tr=document.getElementById("team-track");if(!tr)return;
-  var vp=tr.parentNode,i=0,quieto=false;
+  var vp=tr.parentNode,dots=document.getElementById("t-dots"),i=0,quieto=false,t=null;
   function paso(){var c=tr.querySelector(".member");return c?c.getBoundingClientRect().width+20:0;}
   function visibles(){var p=paso();return p?Math.max(1,Math.round((vp.clientWidth+20)/p)):1;}
-  function mueve(){var max=tr.children.length-visibles();if(i>max)i=0;tr.style.transform="translateX(-"+(i*paso())+"px)";}
-  setInterval(function(){if(quieto)return;i++;if(i>tr.children.length-visibles())i=0;mueve();},SEGUNDOS_EQUIPO*1000);
+  function max(){return Math.max(0,tr.children.length-visibles());}
+  function pinta(){dots.innerHTML="";for(var k=0;k<=max();k++){(function(k){var d=document.createElement("button");d.type="button";d.setAttribute("aria-label","Perfil "+(k+1));d.setAttribute("aria-current",k===i?"true":"false");d.addEventListener("click",function(){ir(k);});dots.appendChild(d);})(k);}}
+  function mueve(){if(i>max())i=0;if(i<0)i=max();tr.style.transform="translateX(-"+(i*paso())+"px)";pinta();}
+  function ir(n){i=n;mueve();reinicia();}
+  function reinicia(){clearInterval(t);t=setInterval(function(){if(!quieto){i++;mueve();}},SEGUNDOS_EQUIPO*1000);}
+  document.getElementById("t-prev").addEventListener("click",function(){ir(i-1);});
+  document.getElementById("t-next").addEventListener("click",function(){ir(i+1);});
   tr.addEventListener("mouseover",function(){quieto=true;});
   tr.addEventListener("mouseleave",function(){quieto=false;});
+  var x0=null;
+  vp.addEventListener("touchstart",function(e){x0=e.touches[0].clientX;},{passive:true});
+  vp.addEventListener("touchend",function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40)ir(dx<0?i+1:i-1);x0=null;});
   window.addEventListener("resize",mueve);
+  mueve();reinicia();
 })();
 </script>
 
