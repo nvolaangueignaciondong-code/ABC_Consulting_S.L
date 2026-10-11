@@ -456,9 +456,43 @@ footer{background:var(--gold);color:var(--navy)}
       <div class="s-dots" id="s-dots"></div>
     </div>
     <!-- FIN DEL CARRUSEL -->
+        <!-- VIDEOS: cambia aqui los videos -->
+    <style>
+    .video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;width:100%}
+    .video-grid video{width:100%;aspect-ratio:16/9;background:#000;border-radius:10px;display:block}
+    </style>
     <div>
-      <div class="tile media"><h3 data-i18n="e3">Vídeos</h3><p data-i18n="e4">Testimonios de estudiantes, llegadas a la universidad y nuestro trabajo en China.</p><a class="btn btn-gold" href="ENLACE-VIDEOS" target="_blank" rel="noopener" data-i18n="e5">Ver vídeos →</a></div>
+      <div class="tile media"><h3 data-i18n="e3">Vídeos</h3><p data-i18n="e4">Testimonios de estudiantes, llegadas a la universidad y nuestro trabajo en China.</p>
+        <div class="video-grid" id="video-grid">
+          <video controls playsinline preload="metadata" src="videos/video1.mp4#t=0.1"></video>
+          <video controls playsinline preload="metadata" src="videos/video2.mp4#t=0.1"></video>
+          <video controls playsinline preload="metadata" src="videos/video3.mp4#t=0.1"></video>
+          <video controls playsinline preload="metadata" src="videos/video4.mp4#t=0.1"></video>
+          <video controls playsinline preload="metadata" src="videos/video5.mp4#t=0.1"></video>
+          <video controls playsinline preload="metadata" src="videos/video6.mp4#t=0.1"></video>
+        </div>
+        <a class="btn btn-gold" href="ENLACE-VIDEOS" target="_blank" rel="noopener" data-i18n="e5">Ver vídeos →</a></div>
     </div>
+    <script>
+    /* Videos: los que no existen se quitan solos; se reproducen al pasar el raton y se paran al salir */
+    (function(){
+      var g=document.getElementById("video-grid");if(!g)return;
+      g.querySelectorAll("video").forEach(function(v){
+        function quita(){if(v.parentNode)v.parentNode.removeChild(v);if(!g.querySelector("video"))g.hidden=true;}
+        if(v.error)quita();else v.addEventListener("error",quita);
+        v.addEventListener("play",function(){g.querySelectorAll("video").forEach(function(o){if(o!==v)o.pause();});});
+        v.addEventListener("mouseenter",function(){
+          var p=v.play();
+          /* Si el navegador no deja reproducir con sonido, se reproduce en silencio */
+          if(p&&p.catch)p.catch(function(){v.muted=true;v.play().catch(function(){});});
+        });
+        v.addEventListener("mouseleave",function(){v.pause();});
+      });
+      /* El boton se oculta mientras no tenga un enlace real */
+      var b=g.parentNode.querySelector('a[href="ENLACE-VIDEOS"]');if(b)b.hidden=true;
+    })();
+    </script>
+    <!-- FIN VIDEOS -->
   </div>
 </section>
 
