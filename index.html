@@ -1,7 +1,8 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" translate="no" class="notranslate">
 <head>
 <meta charset="utf-8">
+<meta name="google" content="notranslate">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="ABC Consulting SL: becas en China, Marruecos y Turquía y logística comercial China–Guinea Ecuatorial.">
 <style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
@@ -50,8 +51,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .btn-navy{background:var(--navy);color:var(--on-navy)}
 .btn-navy:hover{background:var(--navy-3)}
 nav.menu{background:var(--navy)}
-nav.menu ul{list-style:none;margin:0;padding:0;display:flex;gap:4px;overflow-x:auto}
-nav.menu a{display:block;white-space:nowrap;text-decoration:none;color:var(--on-navy);font:800 .95rem var(--display);letter-spacing:.12em;text-transform:uppercase;padding:.8em .9em}
+nav.menu ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:nowrap;justify-content:space-between;gap:0;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch}
+nav.menu ul::-webkit-scrollbar{display:none;height:0}
+@media (max-width:1100px){nav.menu ul{justify-content:flex-start;gap:2px}}
+nav.menu a{display:block;white-space:nowrap;text-decoration:none;color:var(--on-navy);font:800 clamp(.78rem,1.1vw,.92rem) var(--display);letter-spacing:.07em;text-transform:uppercase;padding:.85em .7em}
 nav.menu a:hover{color:var(--gold)}
 
 /* bands */
@@ -568,6 +571,30 @@ footer{background:var(--gold);color:var(--navy)}
 
 <script>
 var T={fr:{
+wa:"WhatsApp",n1:"À propos",n2:"Bourses",n3:"Démarche",n4:"Logistique",n5:"Expérience",n6:"Questions",n7:"Contact",
+h0:"Conseil éducatif · Logistique commerciale",h1:"Votre bourse à l'étranger. <em>Votre fournisseur en Chine.</em>",
+h2:"Nous gérons des bourses pour les jeunes de Guinée équatoriale en Chine, au Maroc et en Turquie, et nous mettons en relation les importateurs locaux avec des fournisseurs chinois de confiance.",
+h3:"Je veux une bourse",h4:"Je cherche des fournisseurs en Chine",h5:"Appel ouvert",h6:"Bourses pour la Chine · Rentrée en mars 2027",
+h7:"Bourses : Chine, Maroc et Turquie",h8:"Commerce : Chine – Guinée équatoriale",h9:"Bureaux à Malabo et Bata. Équipe en Chine.",
+a0:"À propos d'ABC Consulting SL",a1:"Qui sommes-nous",
+a2:"Agence spécialisée dans la <strong>gestion complète de bourses d'études</strong> pour les jeunes de Guinée équatoriale en République populaire de Chine, au Maroc et en Turquie. Nous gérons aussi la <strong>logistique commerciale Chine–Guinée équatoriale</strong>, en mettant en relation les importateurs locaux avec des fournisseurs chinois de confiance.",
+a3:"Mission",a4:"Relier les jeunes Guinéens aux universités étrangères et les entreprises locales aux fournisseurs chinois, avec transparence et rigueur.",
+a5:"Vision",a6:"Être l'agence de référence en Guinée équatoriale pour l'éducation internationale et la logistique Chine–Afrique.",
+a7:"Valeurs",a8:"Transparence · Confiance · Excellence · Engagement envers le client",
+a9:"ABC Consulting SL a été fondée par l'ingénieur Lucio Miko. Elle a commencé en accompagnant des étudiants de Guinée équatoriale qui voulaient étudier en Chine. Le réseau de contacts créé là-bas a ensuite ouvert la deuxième activité : la recherche de fournisseurs pour les entreprises guinéennes.",
+b0:"Bourses d'études",b1:"Trois destinations, une seule démarche",b2:"Nous nous occupons de toute la candidature : choix de l'université, dossier, admission et visa.",
+b3:"Mars 2027",b4:"Chine",b5:"Nous obtenons la lettre d'admission et le formulaire JW exigé pour le visa d'études.",
+b6:"Maroc",b7:"Des études supérieures dans un pays proche. Consultez les appels disponibles.",
+b8:"Turquie",b9:"Des universités entre l'Europe et l'Asie. Consultez les appels disponibles.",
+b10:"Types de bourse",b11:"Bourse complète",b12:"L'option la plus complète. Nous vous expliquons ce qu'elle inclut dans chaque université avant de décider.",
+b13:"Bourse partielle",b14:"Elle couvre une partie des frais. Nous vous précisons ce qui reste à la charge de l'étudiant.",
+b15:"Ce qu'il faut préparer",b16:"Passeport en cours de validité",b17:"Diplômes et relevés de notes",b18:"Photos d'identité",
+b19:"La liste exacte dépend du pays et de l'université ; nous vous la donnons au premier contact.",b20:"Demander la liste des documents",
+p0:"Démarche de candidature",p1:"De votre premier message au voyage, en 7 étapes",
+p2:"Contactez-nous",p3:"Écrivez-nous sur WhatsApp ou passez au bureau de Malabo ou de Bata.",
+p4:"Réunissez les documents",p5:"Nous vous indiquons les documents requis.",
+p6:"Choisissez votre bourse",p7:"Bourse complète ou bourse partielle.",
+p8:"Convenez du mode de paiement",p9:"Nous fixons clairement les conditions avant de commencer.",
 n8:"Équipe",t9:"Voir le profil",t0:"Notre équipe",t1:"Les personnes qui vous accompagnent",t2:"Une équipe entre la Guinée équatoriale et la Chine qui connaît la démarche du début à la fin.",
 p1r:"PDG et fondateur",p1b:"Il a fondé ABC Consulting pour accompagner les étudiants de Guinée équatoriale qui voulaient étudier en Chine.",
 p2r:"Directeur financier",p2b:"Il gère les fonds de l'agence.",
@@ -602,6 +629,30 @@ g0:"Bourses · Commerce Chine–Guinée équatoriale",g1:"Mentions légales",g2:
 g3:"© 2026 ABC Consulting S.L. · abcconsulting2025@my.com",
 m1:"Bonjour, je m'appelle",m2:"Je suis intéressé(e) par :"
 },en:{
+wa:"WhatsApp",n1:"About us",n2:"Scholarships",n3:"Process",n4:"Logistics",n5:"Experience",n6:"FAQ",n7:"Contact",
+h0:"Education advisory · Trade logistics",h1:"Your scholarship abroad. <em>Your supplier in China.</em>",
+h2:"We manage scholarships for young people from Equatorial Guinea in China, Morocco and Türkiye, and connect local importers with trusted Chinese suppliers.",
+h3:"I want a scholarship",h4:"I'm looking for suppliers in China",h5:"Applications open",h6:"Scholarships for China · March 2027 intake",
+h7:"Scholarships: China, Morocco and Türkiye",h8:"Trade: China – Equatorial Guinea",h9:"Offices in Malabo and Bata. Team in China.",
+a0:"About ABC Consulting SL",a1:"Who we are",
+a2:"An agency specialising in <strong>end-to-end student scholarship management</strong> for young people from Equatorial Guinea in the People's Republic of China, Morocco and Türkiye. We also handle <strong>China–Equatorial Guinea trade logistics</strong>, connecting local importers with trusted Chinese suppliers.",
+a3:"Mission",a4:"To connect young Equatoguineans with foreign universities and local businesses with Chinese suppliers, with transparency and rigour.",
+a5:"Vision",a6:"To be the leading agency in Equatorial Guinea for international education and China–Africa logistics.",
+a7:"Values",a8:"Transparency · Trust · Excellence · Commitment to the client",
+a9:"ABC Consulting SL was founded by engineer Lucio Miko. It started by supporting students from Equatorial Guinea who wanted to study in China. The network of contacts built there later opened the second line of work: sourcing suppliers for Equatoguinean businesses.",
+b0:"Student scholarships",b1:"Three destinations, one single process",b2:"We handle the whole application: choice of university, file, admission and visa.",
+b3:"March 2027",b4:"China",b5:"We obtain the admission letter and the JW form required for the student visa.",
+b6:"Morocco",b7:"Higher education in a nearby country. Ask about the calls available.",
+b8:"Türkiye",b9:"Universities between Europe and Asia. Ask about the calls available.",
+b10:"Types of scholarship",b11:"Full scholarship",b12:"The option with the widest coverage. We explain what it includes at each university before you decide.",
+b13:"Partial scholarship",b14:"Covers part of the costs. We detail what remains the student's responsibility.",
+b15:"What to prepare",b16:"Valid passport",b17:"Diplomas and academic transcripts",b18:"Passport-size photos",
+b19:"The exact list depends on the country and university; we give it to you at first contact.",b20:"Ask for the document list",
+p0:"Application process",p1:"From your first message to your trip, in 7 steps",
+p2:"Contact us",p3:"Message us on WhatsApp or visit our Malabo or Bata office.",
+p4:"Gather your documents",p5:"We tell you which documents are required.",
+p6:"Choose your scholarship",p7:"Full or partial scholarship.",
+p8:"Agree on payment",p9:"We make the terms clear before starting.",
 n8:"Team",t9:"View profile",t0:"Our team",t1:"The people who guide you",t2:"A team between Equatorial Guinea and China that knows the process from start to finish.",
 p1r:"CEO and Founder",p1b:"He founded ABC Consulting to support students from Equatorial Guinea who wanted to study in China.",
 p2r:"Finance Manager",p2b:"Manages the agency's funds.",
