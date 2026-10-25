@@ -470,40 +470,63 @@ footer{background:var(--gold);color:var(--navy)}
       <div class="s-dots" id="s-dots"></div>
     </div>
     <!-- FIN DEL CARRUSEL -->
-        <!-- VIDEOS: cambia aqui los videos -->
+        <!-- VIDEOS: cambia aqui los videos (un video cada vez, con boton para pasar al siguiente) -->
     <style>
-    .video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;width:100%}
-    .video-grid video{width:100%;aspect-ratio:16/9;background:#000;border-radius:10px;display:block}
+    .vp{display:flex;flex-direction:column;align-items:center;gap:16px;width:100%}
+    .vp-stage{position:relative;width:100%;max-width:340px;aspect-ratio:9/16;max-height:600px;background:#000;border-radius:14px;overflow:hidden;border:3px solid var(--gold)}
+    .vp-stage video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000;opacity:0;pointer-events:none;transition:opacity .4s}
+    .vp-stage video.on{opacity:1;pointer-events:auto}
+    .vp-bar{display:flex;align-items:center;gap:14px}
+    .vp-btn{font:800 .95rem var(--display);letter-spacing:.04em;padding:.75em 1.2em;border-radius:8px;border:2px solid var(--gold);cursor:pointer}
+    .vp-next{background:var(--gold);color:var(--navy)}
+    .vp-next:hover{background:#FFC53D}
+    .vp-prev{background:transparent;color:var(--gold)}
+    .vp-prev:hover{background:var(--gold);color:var(--navy)}
+    .vp-count{font:900 1.1rem var(--display);color:var(--on-navy);font-variant-numeric:tabular-nums;min-width:3.5em;text-align:center}
     </style>
     <div>
       <div class="tile media"><h3 data-i18n="e3">Vídeos</h3><p data-i18n="e4">Testimonios de estudiantes, llegadas a la universidad y nuestro trabajo en China.</p>
-        <div class="video-grid" id="video-grid">
-          <video controls playsinline preload="metadata" src="videos/video1.mp4#t=0.1"></video>
-          <video controls playsinline preload="metadata" src="videos/video2.mp4#t=0.1"></video>
-          <video controls playsinline preload="metadata" src="videos/video3.mp4#t=0.1"></video>
-          <video controls playsinline preload="metadata" src="videos/video4.mp4#t=0.1"></video>
-          <video controls playsinline preload="metadata" src="videos/video5.mp4#t=0.1"></video>
-          <video controls playsinline preload="metadata" src="videos/video6.mp4#t=0.1"></video>
+        <div class="vp" id="video-grid">
+          <div class="vp-stage">
+            <video class="on" controls playsinline preload="metadata" src="videos/video1.mp4#t=0.1"></video>
+            <video controls playsinline preload="metadata" src="videos/video2.mp4#t=0.1"></video>
+            <video controls playsinline preload="metadata" src="videos/video3.mp4#t=0.1"></video>
+            <video controls playsinline preload="metadata" src="videos/video4.mp4#t=0.1"></video>
+            <video controls playsinline preload="metadata" src="videos/video5.mp4#t=0.1"></video>
+          </div>
+          <div class="vp-bar">
+            <button type="button" class="vp-btn vp-prev" id="vp-prev" aria-label="Vídeo anterior">&#8249;</button>
+            <span class="vp-count" id="vp-count">1 / 5</span>
+            <button type="button" class="vp-btn vp-next" id="vp-next"><span data-i18n="e6">Siguiente vídeo</span> &#8250;</button>
+          </div>
         </div>
-        <a class="btn btn-gold" href="ENLACE-VIDEOS" target="_blank" rel="noopener" data-i18n="e5">Ver vídeos →</a></div>
+      </div>
     </div>
     <script>
-    /* Videos: los que no existen se quitan solos; se reproducen al pasar el raton y se paran al salir */
+    /* Videos: uno cada vez. Ordenador: se reproduce al pasar el raton. Movil: se reproduce cuando esta visible */
     (function(){
       var g=document.getElementById("video-grid");if(!g)return;
-      g.querySelectorAll("video").forEach(function(v){
-        function quita(){if(v.parentNode)v.parentNode.removeChild(v);if(!g.querySelector("video"))g.hidden=true;}
-        if(v.error)quita();else v.addEventListener("error",quita);
-        v.addEventListener("play",function(){g.querySelectorAll("video").forEach(function(o){if(o!==v)o.pause();});});
-        v.addEventListener("mouseenter",function(){
-          var p=v.play();
-          /* Si el navegador no deja reproducir con sonido, se reproduce en silencio */
-          if(p&&p.catch)p.catch(function(){v.muted=true;v.play().catch(function(){});});
-        });
-        v.addEventListener("mouseleave",function(){v.pause();});
+      var vs=g.querySelectorAll("video"),i=0,cnt=document.getElementById("vp-count");
+      var tactil=window.matchMedia("(hover: none)").matches,visible=false;
+      function reproduce(v){var p=v.play();if(p&&p.catch)p.catch(function(){v.muted=true;v.play().catch(function(){});});}
+      function ir(n){
+        vs[i].pause();vs[i].classList.remove("on");
+        i=(n+vs.length)%vs.length;vs[i].classList.add("on");
+        cnt.textContent=(i+1)+" / "+vs.length;
+        if(tactil&&visible){vs[i].muted=true;reproduce(vs[i]);}
+      }
+      document.getElementById("vp-next").addEventListener("click",function(){ir(i+1);});
+      document.getElementById("vp-prev").addEventListener("click",function(){ir(i-1);});
+      vs.forEach(function(v){
+        if(!tactil){v.addEventListener("mouseenter",function(){reproduce(v);});v.addEventListener("mouseleave",function(){v.pause();});}
       });
-      /* El boton se oculta mientras no tenga un enlace real */
-      var b=g.parentNode.querySelector('a[href="ENLACE-VIDEOS"]');if(b)b.hidden=true;
+      if(tactil&&"IntersectionObserver" in window){
+        new IntersectionObserver(function(es){es.forEach(function(e){
+          visible=e.intersectionRatio>=0.6;
+          if(visible){vs[i].muted=true;reproduce(vs[i]);}else vs[i].pause();
+        });},{threshold:[0,0.6]}).observe(g.querySelector(".vp-stage"));
+      }
+      cnt.textContent="1 / "+vs.length;
     })();
     </script>
     <!-- FIN VIDEOS -->
@@ -632,7 +655,7 @@ l5:"Vérification",l6:"Nous vérifions que le fournisseur est réel et fiable av
 l7:"Négociation et commande",l8:"Nous négocions le prix et les conditions en chinois, en votre nom.",
 l9:"Envoi en Guinée équatoriale",l10:"Nous coordonnons le transport de la Chine jusqu'à destination.",l11:"Demander un devis",
 e0:"Expérience",e1:"Notre expérience en vidéos et en images",e2:"Vidéos et photos de nos étudiants et de notre travail.",
-e3:"Vidéos",e4:"Témoignages d'étudiants, arrivées à l'université et notre travail en Chine.",e5:"Voir les vidéos →",
+e3:"Vidéos",e4:"Témoignages d'étudiants, arrivées à l'université et notre travail en Chine.",e5:"Voir les vidéos →",e6:"Vidéo suivante",
 f0:"Questions fréquentes",f1:"Ce qu'on nous demande le plus",
 f2:"Combien de temps prend la procédure de bourse ?",f3:"L'admission peut prendre de 1 à 2 mois. Vient ensuite la demande de visa, dont le délai dépend de l'ambassade.",
 f4:"Dans quels pays puis-je aller ?",f5:"Nous gérons des bourses en Chine, au Maroc et en Turquie.",
@@ -690,7 +713,7 @@ l5:"Verification",l6:"We check that the supplier is real and reliable before you
 l7:"Negotiation and order",l8:"We negotiate price and terms in Chinese on your behalf.",
 l9:"Shipping to Equatorial Guinea",l10:"We coordinate transport from China to destination.",l11:"Request a quote",
 e0:"Track record",e1:"Our experience in videos and images",e2:"Videos and photos of our students and our work.",
-e3:"Videos",e4:"Student testimonials, arrivals at university and our work in China.",e5:"Watch videos →",
+e3:"Videos",e4:"Student testimonials, arrivals at university and our work in China.",e5:"Watch videos →",e6:"Next video",
 f0:"Frequently asked questions",f1:"What people ask us most",
 f2:"How long does the scholarship process take?",f3:"Admission can take 1 to 2 months. The visa application follows, and its timing depends on the embassy.",
 f4:"Which countries can I go to?",f5:"We manage scholarships in China, Morocco and Türkiye.",
